@@ -1,0 +1,221 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="interface.css" />
+		<script type="text/javascript" src="main.js"> </script>
+		<meta charset="UTF-8">
+		<meta name="description" content="wip">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title> Cosmic Idle </title>
+	</head>
+	<body>
+		<div class="expDiv">
+			<b>Level</b>
+			<b><span id="level">1</span></b>
+			<progress id="levelProgress" value="0" max="10"></progress>
+		</div>
+		<div class="selectDiv">
+			<button class="tablinks" onclick="openTab(event, 'Mining')">Mining</button>
+			<button class="tablinks" onclick="openTab(event, 'Shop')">Shop</button>
+			<button class="tablinks" onclick="openTab(event, 'Combat')">Combat</button>
+			<hr>
+		</div>
+		<div class="tabcontent" id="Mining">
+			<div id="minesDiv" class="minesDiv">
+				<b>Mines</b>
+				<hr>
+				Coal mines
+				<input type="radio" name="radio" id="boxTravelCoal" onclick="travelMine(0)"/>
+				<br>
+				<div id="ironMineDiv" hidden="true">
+					Iron mines
+					<input type="radio" name="radio" id="boxTravelIron" onclick="travelMine(1)"/>
+				</div>
+				<div id="lapisMineDiv" hidden="true">
+					Lapis mines
+					<input type="radio" name="radio" id="boxTravelLapis" onclick="travelMine(2)"/>
+				</div>
+				<div id="redstoneMineDiv" hidden="true">
+					Redstone mines
+					<input type="radio" name="radio" id="boxTravelRedstone" onclick="travelMine(3)"/>
+				</div>
+				<div id="goldMineDiv" hidden="true">
+					Gold mines
+					<input type="radio" name="radio" id="boxTravelGold" onclick="travelMine(4)"/>
+				</div>
+				<div id="diamondMineDiv" hidden="true">
+					Diamond mines
+					<input type="radio" name="radio" id="boxTravelDiamond" onclick="travelMine(5)"/>
+				</div>
+			</div>
+			<div class="statsDiv">
+				<b>Currency</b>
+				<hr>
+				Money: $<span id="money">0.0</span>
+				<br>
+				Energy: <span id="energy">0.0</span>
+			</div>
+			<div class="pickaxeDiv">
+				<b>Pickaxe</b>
+				<hr>
+				<span id="pickaxeMaterial">Wooden</span>
+				pickaxe
+				<br>
+				<button id="buttonPickaxeDeposit" onclick="pickaxeDeposit()">Deposit energy</button>
+				<br>
+				<button id="buttonPowerball" onclick="powerballLaunch()" disabled="true">Launch powerball</button>
+				<br>
+				<br>
+				<span id="pickaxeEnchants"></span>
+				<br>
+				Progress to next enchant: 
+				<progress id="pickaxeProgress" value="0" max="5"></progress>
+				<button id="buttonPickaxeEnchant" onclick="pickaxeEnchant()" disabled="true">Enchant</button>
+				<br>
+				<span class="enchantOption"></span>
+				<button class="buttonEnchantOption" onclick="pickaxeSelect(0)" hidden="true">Select</button>
+				<br>
+				<span class="enchantOption"></span>
+				<button class="buttonEnchantOption" onclick="pickaxeSelect(1)" hidden="true">Select</button>
+				<br>
+				<span class="enchantOption"></span>
+				<button class="buttonEnchantOption" onclick="pickaxeSelect(2)" hidden="true">Select</button>
+				<br>
+				<span class="enchantOption"></span>
+				<button class="buttonEnchantOption" onclick="pickaxeSelect(3)" hidden="true">Select</button>
+				<br>
+			</div>
+		</div>
+		<div class="tabcontent" id="Shop">
+			<div class="shopDiv">
+				<b>Shop</b>
+				<hr>
+				Prestige pickaxe: level <span id="pickaxeLevel">30</span><span> + $</span><span id="pickaxeCost">50</span>
+				<button id="buttonPickaxeCost" onclick="shopPickaxe()" disabled="true">Buy</button>
+				<br>
+				Prestige gear: level <span id="gearLevel">30</span><span> + $</span><span id="gearCost">200</span>
+				<button id="buttonGearCost" onclick="shopGear()" disabled="true">Buy</button>
+				<br>
+				Gear enchant book: 20 energy 
+				<button id="buttonBookBuy" onclick="shopBook()" disabled="true">Buy</button>
+				<br>
+				Convert money to energy: 
+				<button id="buttonMoneyEnergy" onclick="shopEnergy()">Buy</button>
+				<br>
+				Convert energy to money: 
+				<button id="buttonEnergyMoney" onclick="shopMoney()">Buy</button>
+			</div>
+			<div class="wormholeDiv">
+				<b>Wormhole</b>
+				<hr>
+				Books: <span id="bookCount">0</span>
+				<button id="buttonBookOpen" onclick="bookOpen()" disabled="true">Open</button>
+				<br>
+				Pages: <span id="pageCount">0</span>
+				<button id="buttonBookPaged" onclick="bookPaged()" disabled="true">Use</button>
+				<button id="buttonBookPagedAll" onclick="bookPagedAll()" disabled="true">Use All</button>
+				<br>
+				<br>
+				<span id="bookDisplay"></span>
+				<br>
+				<span id="successDisplay"></span>
+				<br>
+				<span id="failureDisplay"></span>
+				<br>
+				<progress id="bookProgress" value="0" max="10"></progress>
+				<button id="buttonBookUpgrade" onclick="bookUpgrade()" disabled="true">Upgrade</button>
+				<br>
+				<button id="buttonBookDeposit" onclick="bookDeposit()" disabled="true">Deposit energy</button>
+				<button id="buttonBookSalvage" onclick="bookSalvage()" disabled="true">Salvage</button>
+			</div>
+			<div class="equipDiv">
+				<b>Equipment</b>
+				<hr>
+				Items: 
+				<select id="equipmentOptions" onchange="equipSelect()"> 
+					<option value="sword">Sword</option> 
+					<option value="helmet">Helmet</option> 
+					<option value="chestplate">Chestplate</option> 
+					<option value="leggings">Leggings</option> 
+					<option value="boots">Boots</option>
+				</select>
+				<br>
+				<br>
+				<div id="swordDiv">
+					<span id="swordMaterial">Wood</span> sword
+					<button id="buttonEnchant0" onclick="equipEnchant(0)" disabled="true">Use book</button>
+					<br>
+					<br>
+					<span id="0Enchants"></span>
+					<br>
+					Skin: <span>none</span>
+				</div>
+				<div id="helmetDiv" hidden="true">
+					<span id="helmetMaterial">Chain</span> helmet
+					<button id="buttonEnchant1" onclick="equipEnchant(1)" disabled="true">Use book</button>
+					<br>
+					<br>
+					<span id="1Enchants"></span>
+					<br>
+					Skin: <span>none</span>
+				</div>
+				<div id="chestplateDiv" hidden="true">
+					<span id="chestplateMaterial">Chain</span> chestplate
+					<button id="buttonEnchant2" onclick="equipEnchant(2)" disabled="true">Use book</button>
+					<br>
+					<br>
+					<span id="2Enchants"></span>
+					<br>
+					Skin: <span>none</span>
+				</div>
+				<div id="leggingsDiv" hidden="true">
+					<span id="leggingsMaterial">Chain</span> leggings
+					<button id="buttonEnchant3" onclick="equipEnchant(3)" disabled="true">Use book</button>
+					<br>
+					<br>
+					<span id="3Enchants"></span>
+					<br>
+					Skin: <span>none</span>
+				</div>
+				<div id="bootsDiv" hidden="true">
+					<span id="bootsMaterial">Chain</span> boots
+					<button id="buttonEnchant4" onclick="equipEnchant(4)" disabled="true">Use book</button>
+					<br>
+					<br>
+					<span id="4Enchants"></span>
+					<br>
+					Skin: <span>none</span>
+				</div>
+			</div>
+		</div>
+		<div class="tabcontent" id="Combat">
+			<div class="combatDiv">
+				<b>Combat</b>
+				<hr>
+				<button id="buttonCombatSearch" onclick="combatSearch()">Find enemy</button>
+				<button id="buttonCombatRun" onclick="combatRun()" disabled="true">Run</button>
+				<br>
+				<br>
+				Health: <span id="playerHealth">20</span>
+				<button id="buttonCombatAttack" onclick="combatAttack()" disabled="true">Attack</button>
+				<br>
+				<br>
+				<span id="enemyName"></span>
+				<br>
+				<span id="enemyHealth"></span>
+			</div>
+			<div class="lootDiv">
+				<b>Loot</b>
+				<hr>
+				Shards: <span id="shardDisplay">0</span>
+				<button id="buttonOpenShard" onclick="openShard()" disabled="true">Open</button>
+				<br>
+				Bandit lockboxes: 0
+				<button id="buttonOpenLockbox" onclick="openLockbox()" disabled="true">Open</button>
+			</div>
+			<div class="chatDiv">
+				<b>Chat</b>
+				<hr>
+			</div>
+		</div>
+	</body>
+</html>

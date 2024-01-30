@@ -1,0 +1,52 @@
+.expDiv {
+	font-size: 42px;
+	height: 100;
+}
+.tabcontent {
+  display: none;
+}
+.statsDiv {
+	width: 275;
+	padding: 12px 24px;
+	float: left;
+}
+.minesDiv {
+	width: 275;
+	padding: 12px 24px;
+	float: left;
+}
+.shopDiv {
+	width: 275;
+	padding: 12px 24px;
+	float: left;
+}
+.pickaxeDiv {
+	width: 275;
+	padding: 12px 24px;
+	float: left;
+}
+.wormholeDiv {
+	width: 275;
+	padding: 12px 24px;
+	float: left;
+}
+.equipDiv {
+	width: 275;
+	padding: 12px 24px;
+	float: left;
+}
+.combatDiv {
+	width: 275;
+	padding: 12px 24px;
+	float: left;
+}
+.lootDiv {
+	width: 275;
+	padding: 12px 24px;
+	float: left;
+}
+.chatDiv {
+	width: 275;
+	padding: 12px 24px;
+	float: left;
+}
